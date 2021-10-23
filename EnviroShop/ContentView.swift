@@ -88,12 +88,22 @@ struct BarcodeView: View {
 
 struct ProductIdView: View {
     @State private var selection: String? = nil
+    @State private var id: String = ""
+    @State private var isEditing = false
     
     var body: some View{
         NavigationView{
             ZStack{
                 //Background colors
                 LinearGradient(gradient: Gradient(colors: [.ecream,.white]), startPoint: .leading, endPoint: .bottom).ignoresSafeArea(edges: [.top, .bottom])
+                
+                VStack{
+                    Text("Enter Product ID:")
+                    TextField("Product", text: $id)
+                        .frame(width: 300, height: 50)
+                        .background(Color.eblue)
+                        .cornerRadius(10)
+                }
             }
         }
     }
@@ -102,6 +112,6 @@ struct ProductIdView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ProductIdView()
     }
 }
