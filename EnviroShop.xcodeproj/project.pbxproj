@@ -11,6 +11,7 @@
 		ADE946F727247D7600B6502A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE946F627247D7600B6502A /* ContentView.swift */; };
 		ADE946F927247D7700B6502A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE946F827247D7700B6502A /* Assets.xcassets */; };
 		ADE946FC27247D7700B6502A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADE946FB27247D7700B6502A /* Preview Assets.xcassets */; };
+		ADE947042724840F00B6502A /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE947032724840F00B6502A /* ColorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		ADE946F827247D7700B6502A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADE946FB27247D7700B6502A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ADE946FD27247D7700B6502A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADE947032724840F00B6502A /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		ADE946F327247D7600B6502A /* EnviroShop */ = {
 			isa = PBXGroup;
 			children = (
+				ADE947032724840F00B6502A /* ColorManager.swift */,
 				ADE946F427247D7600B6502A /* EnviroShopApp.swift */,
 				ADE946F627247D7600B6502A /* ContentView.swift */,
 				ADE946F827247D7700B6502A /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE947042724840F00B6502A /* ColorManager.swift in Sources */,
 				ADE946F727247D7600B6502A /* ContentView.swift in Sources */,
 				ADE946F527247D7600B6502A /* EnviroShopApp.swift in Sources */,
 			);
