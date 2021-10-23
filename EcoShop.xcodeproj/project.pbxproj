@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ADE946F127247D7600B6502A /* EnviroShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviroShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE946F127247D7600B6502A /* EcoShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE946F427247D7600B6502A /* EnviroShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnviroShopApp.swift; sourceTree = "<group>"; };
 		ADE946F627247D7600B6502A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ADE946F827247D7700B6502A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		ADE946F227247D7600B6502A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ADE946F127247D7600B6502A /* EnviroShop.app */,
+				ADE946F127247D7600B6502A /* EcoShop.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,9 +75,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		ADE946F027247D7600B6502A /* EnviroShop */ = {
+		ADE946F027247D7600B6502A /* EcoShop */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = ADE9470027247D7700B6502A /* Build configuration list for PBXNativeTarget "EnviroShop" */;
+			buildConfigurationList = ADE9470027247D7700B6502A /* Build configuration list for PBXNativeTarget "EcoShop" */;
 			buildPhases = (
 				ADE946ED27247D7600B6502A /* Sources */,
 				ADE946EE27247D7600B6502A /* Frameworks */,
@@ -87,9 +87,9 @@
 			);
 			dependencies = (
 			);
-			name = EnviroShop;
+			name = EcoShop;
 			productName = EnviroShop;
-			productReference = ADE946F127247D7600B6502A /* EnviroShop.app */;
+			productReference = ADE946F127247D7600B6502A /* EcoShop.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -106,7 +106,7 @@
 					};
 				};
 			};
-			buildConfigurationList = ADE946EC27247D7600B6502A /* Build configuration list for PBXProject "EnviroShop" */;
+			buildConfigurationList = ADE946EC27247D7600B6502A /* Build configuration list for PBXProject "EcoShop" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -119,7 +119,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ADE946F027247D7600B6502A /* EnviroShop */,
+				ADE946F027247D7600B6502A /* EcoShop */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		ADE946EC27247D7600B6502A /* Build configuration list for PBXProject "EnviroShop" */ = {
+		ADE946EC27247D7600B6502A /* Build configuration list for PBXProject "EcoShop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE946FE27247D7700B6502A /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ADE9470027247D7700B6502A /* Build configuration list for PBXNativeTarget "EnviroShop" */ = {
+		ADE9470027247D7700B6502A /* Build configuration list for PBXNativeTarget "EcoShop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				ADE9470127247D7700B6502A /* Debug */,

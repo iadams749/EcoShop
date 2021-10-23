@@ -27,6 +27,7 @@ struct ContentView: View {
                 
                 VStack{
                     
+                    
                     //App Label
                     Text("EcoShop")
                         .frame(width: 400, height: 60)
@@ -90,21 +91,38 @@ struct ProductIdView: View {
     @State private var selection: String? = nil
     @State private var id: String = ""
     @State private var isEditing = false
+    @State private var errorLabel: String = ""
     
     var body: some View{
         NavigationView{
-            ZStack{
+            ZStack (alignment: .top) {
                 //Background colors
                 LinearGradient(gradient: Gradient(colors: [.ecream,.white]), startPoint: .leading, endPoint: .bottom).ignoresSafeArea(edges: [.top, .bottom])
                 
                 VStack{
+                    
+                    //Top Banner
+                    Image("Banner")
+                        .resizable()
+                        .frame(width: 390, height: 100).padding(.bottom, 100)
+                    
                     Text("Enter Product ID:")
-                    TextField("Product", text: $id)
+                    TextField("Product",
+                              text: $id,
+                              onCommit:{
+                                let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+                                
+                              })
                         .frame(width: 300, height: 50)
-                        .background(Color.eblue)
+                        .background(Color.egreen)
+                        .foregroundColor(Color.black)
+                        .multilineTextAlignment(.center)
                         .cornerRadius(10)
+                    Text(errorLabel)
                 }
             }
+            .ignoresSafeArea(edges: .top)
+
         }
     }
 }
