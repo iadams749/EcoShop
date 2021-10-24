@@ -81,7 +81,6 @@ struct ContentView: View {
                     Image("Logo")
                         .resizable()
                         .frame(width: 300, height: 300)
-                        .shadow(radius: 10)
                     
                     
                 }
@@ -113,7 +112,7 @@ struct BarcodeView: View {
             
             NavigationLink(destination: ProductIdView(), tag: "ProductId", selection: $selection ) {EmptyView()}
             
-            NavigationLink(destination: ProfileView(idString: upc, pic: imageName, brand: "Reformation", envSus: 1, labSus: 1, aniSus: 3, price: 5, origin: "China"), tag: "Profile", selection: $selection ) {EmptyView()}
+            NavigationLink(destination: ProfileView(idString: upc, pic: imageName, brand: "Shein", envSus: 1, labSus: 1, aniSus: 3, price: 5, origin: "China"), tag: "Profile", selection: $selection ) {EmptyView()}
             
             VStack{
                 //Top Banner
@@ -278,6 +277,142 @@ struct ProductIdView: View {
 }
 
 struct ProfileView: View{
+    @State private var selection: String? = nil
+    @State private var imageName = Image("model1")
+    
+    var idString: String
+    var pic: Image
+    var brand: String
+    var envSus: Int
+    var labSus: Int
+    var aniSus: Int
+    var price: Int
+    var origin: String
+    
+    var body: some View{
+        
+        
+        ZStack(alignment: .top){
+            
+            //Background colors
+            LinearGradient(gradient: Gradient(colors: [.ecream,.white]), startPoint: .leading, endPoint: .bottom).ignoresSafeArea(edges: [.top, .bottom])
+            
+            VStack{
+                //Top Banner
+                Image("Banner")
+                    .resizable()
+                    .frame(width: 390, height: 100)
+                    .border(Color.black, width: 3)
+                
+                Text("UPC: \(idString)")
+                    .fontWeight(.bold)
+                    .font(.system(size: 40))
+                    .foregroundColor(Color.black)
+                    .padding(.top, 20)
+                pic
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(16)
+                    .foregroundColor(Color.gray)
+                    .overlay(RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.black, lineWidth: 4))
+                    .padding(.bottom, 20)
+                
+                let sum = envSus + labSus + aniSus
+                
+                
+                HStack(spacing: 15){
+                    Image(systemName: "leaf")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(Color.egreen)
+                        .shadow(color: .egreen, radius: 4)
+                    if sum >= 5 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 8 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 11 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 14 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                }
+                .padding(.bottom, 10)
+                
+                NavigationLink(destination: BarcodeView(), tag: "Barcode", selection: $selection ) {EmptyView()}
+                NavigationLink(destination: SimilarItemsView(idString: "01234565", pic: imageName, brand: "Shein", envSus: 1, labSus: 1, aniSus: 3, price: 5, origin: "China"), tag: "Similar", selection: $selection ) {EmptyView()}
+                
+                VStack(alignment: .leading, spacing: 10){
+                    Text("Sustainability Report:")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .font(.system(size: 25))
+                    Text("Brand: \(brand)")
+                        .foregroundColor(.black)
+                    Text("Environmental Sustainability: \(envSus)/5")
+                        .foregroundColor(.black)
+                    Text("Labor Sustainability: \(labSus)/5")
+                        .foregroundColor(.black)
+                    Text("Animal Sustainability: \(aniSus)/5")
+                        .foregroundColor(.black)
+                    Text("Price: $\(price)")
+                        .foregroundColor(.black)
+                    Text("Location of Origin: \(origin)")
+                        .foregroundColor(.black)
+                    
+                }
+                .background(Color.white.opacity(0.3))
+                .padding(.trailing, 100)
+                
+                VStack(spacing: 40){
+                    Button(action:{
+                        self.selection = "Similar"
+                    },
+                    label: {
+                        Text("See Similar Items")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.black)
+                    })
+                    .frame(width: 200, height: 30)
+                    .background(Color.eblue)
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+                }.padding(.bottom, 40)
+                .padding(.top, 10)
+                .shadow(radius: 10)
+            }
+            
+        }
+        .ignoresSafeArea(edges: .top)
+    }
+}
+
+
+struct SimilarItemsView: View{
+    @State private var selection: String? = nil
+    @State private var imageName = Image("model1")
     
     var idString: String
     var pic: Image
@@ -377,11 +512,10 @@ struct ProfileView: View{
                         .foregroundColor(.black)
                     Text("Location of Origin: \(origin)")
                         .foregroundColor(.black)
-                    
+    
                 }
                 .background(Color.white.opacity(0.3))
                 .padding(.trailing, 100)
-                
                 
             }
             
@@ -389,7 +523,6 @@ struct ProfileView: View{
         .ignoresSafeArea(edges: .top)
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
