@@ -379,7 +379,7 @@ struct ProfileView: View{
                         .foregroundColor(.black)
                     
                 }
-                .background(Color.white.opacity(0.2))
+                .background(Color.white.opacity(0.3))
                 .padding(.trailing, 100)
                 
                 
