@@ -34,41 +34,57 @@ struct ContentView: View {
                     //Top Banner
                     Image("Banner")
                         .resizable()
-                        .frame(width: 390, height: 100).padding(.bottom, 100)
+                        .frame(width: 400, height: 100).padding(.bottom, 0)
+                        .border(Color.black, width: 3)
                     
-                    
-                    //Search by label
-                    Text("Search By...")
-                        .frame(width: 400, height: 60)
+                    VStack(spacing: 40){
+                        
+                        //Search by label
+                        Text("What Would You Like To Search By?")
+                            .fontWeight(.bold)
+                            .frame(width: 400, height: 60)
+                            .background(Color.egreen)
+                            .cornerRadius(10)
+                        
+                        //Barcode Search Button
+                        Button(action:{
+                            self.selection = "Barcode"
+                        },
+                        label: {
+                            Text("BARCODE")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                        })
+                        .frame(width: 250, height: 60)
                         .background(Color.eblue)
-                        .padding(.bottom, 100)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        
+                        //Product ID Search Button
+                        Button(action:{
+                            self.selection = "ProductId"
+                        },
+                        label: {
+                            Text("PRODUCT ID")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.black)
+                        })
+                        .frame(width: 250, height: 60)
+                        .background(Color.eblue)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                    }.padding(.bottom, 40)
+                    .padding(.top, -8)
+                    //.background(Color.gray.opacity(0.5))
+                    .shadow(radius: 10)
                     
-                    //Barcode Search Button
-                    Button(action:{
-                        self.selection = "Barcode"
-                    },
-                    label: {
-                        Text("BARCODE")
-                            .foregroundColor(Color.black)
-                    })
-                    .frame(width: 250, height: 60)
-                    .background(Color.egreen)
-                    .cornerRadius(10)
-                    .padding(.bottom, 100)
-                    
-                    Button(action:{
-                        self.selection = "ProductId"
-                    },
-                    label: {
-                        Text("PRODUCT ID")
-                            .foregroundColor(Color.black)
-                    })
-                    .frame(width: 250, height: 60)
-                    .background(Color.egreen)
-                    .cornerRadius(10)
+                    Image("Logo")
+                        .resizable()
+                        .frame(width: 300, height: 300)
+                        .shadow(radius: 10)
                     
                     
-                }.padding(.bottom, 270)
+                }
                 
             }
             .ignoresSafeArea(edges: .top)
@@ -82,6 +98,8 @@ struct BarcodeView: View {
     @State var show = false
     @State var imagePicker = false
     @State var source : UIImagePickerController.SourceType = .photoLibrary
+    @State var upc = ""
+    @State var imageName = Image("model1")
     
     
     var body: some View{
@@ -95,11 +113,14 @@ struct BarcodeView: View {
             
             NavigationLink(destination: ProductIdView(), tag: "ProductId", selection: $selection ) {EmptyView()}
             
+            NavigationLink(destination: ProfileView(idString: upc, pic: imageName, brand: "Reformation", envSus: 1, labSus: 1, aniSus: 3, price: 5, origin: "China"), tag: "Profile", selection: $selection ) {EmptyView()}
+            
             VStack{
                 //Top Banner
                 Image("Banner")
                     .resizable()
-                    .frame(width: 390, height: 100).padding(.bottom, 50)
+                    .frame(width: 390, height: 100)
+                    .border(Color.black, width: 3)
                 
                 if imageData.count != 0 {
                     Image(uiImage: UIImage(data: self.imageData)!)
@@ -108,6 +129,7 @@ struct BarcodeView: View {
                         .foregroundColor(Color.purple)
                         //.rotationEffect(.degrees())
                         .padding(.bottom, 20)
+                        .padding(.top, 50)
                 }
                 else{
                     Image(systemName: "plus.square")
@@ -115,12 +137,14 @@ struct BarcodeView: View {
                         .frame(width: 350, height: 350)
                         .foregroundColor(Color.egreen)
                         .padding(.bottom, 20)
+                        .padding(.top, 50)
                 }
                 
                 Button(action: {
                     self.show.toggle()
                 }){
                     Text("Take a Photo")
+                        .fontWeight(.bold)
                         .frame(width: 250, height: 100, alignment: .center)
                         .background(Color.eblue)
                         .foregroundColor(Color.ecream)
@@ -145,20 +169,27 @@ struct BarcodeView: View {
                             
                             guard let results = request.results else { return }
                             
-                            print(results.count)
-                            
-                            // Loop through the found results
-                            for result in results {
-                                
-                                // Cast the result to a barcode-observation
-                                if let barcode = result as? VNBarcodeObservation {
+                            if results.count > 0{
+                                if let barcode = results[0] as? VNBarcodeObservation {
+                                    upc = barcode.payloadStringValue!
+                                    imageName = Image("model1")
                                     
-                                    // Print barcode-values
-                                    print("Symbology: \(barcode.payloadStringValue!)")
-                                    
-                                    
+                                    selection = "Profile"
                                 }
                             }
+                            
+                            // Loop through the found results
+                            /*for result in results {
+                             
+                             // Cast the result to a barcode-observation
+                             if let barcode = result as? VNBarcodeObservation {
+                             
+                             // Print barcode-values
+                             print("Symbology: \(barcode.payloadStringValue!)")
+                             
+                             
+                             }
+                             }*/
                             
                         })
                         
@@ -174,6 +205,7 @@ struct BarcodeView: View {
                     }
                 }){
                     Text("Submit Photo")
+                        .fontWeight(.bold)
                         .frame(width: 250, height: 100, alignment: .center)
                         .background(Color.eblue)
                         .foregroundColor(Color.ecream)
@@ -197,6 +229,8 @@ struct ProductIdView: View {
             
             NavigationLink(destination: BarcodeView(), tag: "Barcode", selection: $selection ) {EmptyView()}
             
+            NavigationLink(destination: ProfileView(idString: id, pic: Image("model2"), brand: "Reformation", envSus: 5, labSus: 4, aniSus: 2, price: 38, origin: "Los Angeles"), tag: "Profile", selection: $selection ) {EmptyView()}
+            
             //Background colors
             LinearGradient(gradient: Gradient(colors: [.ecream,.white]), startPoint: .leading, endPoint: .bottom).ignoresSafeArea(edges: [.top, .bottom])
             
@@ -205,10 +239,13 @@ struct ProductIdView: View {
                 //Top Banner
                 Image("Banner")
                     .resizable()
-                    .frame(width: 390, height: 100).padding(.bottom, 100)
+                    .frame(width: 390, height: 100)
+                    .border(Color.black, width: 3)
                 
                 Text("Enter Product ID:")
+                    .fontWeight(.bold)
                     .foregroundColor(Color.black)
+                    .padding(.top, 100)
                 TextField("Product",
                           text: $id,
                           onCommit:{
@@ -217,11 +254,11 @@ struct ProductIdView: View {
                             if(num == nil){
                                 errorLabel = "Please enter a valid UPC";
                             }
-                            else if(id.count != 12){
+                            else if(id.count != 8){
                                 errorLabel = "Please enter a valid UPC"
                             }
                             else{
-                                print(num!)
+                                selection = "Profile"
                             }
                           })
                     .frame(width: 300, height: 50)
@@ -243,22 +280,120 @@ struct ProductIdView: View {
 struct ProfileView: View{
     
     var idString: String
+    var pic: Image
+    var brand: String
+    var envSus: Int
+    var labSus: Int
+    var aniSus: Int
+    var price: Int
+    var origin: String
+    
     var body: some View{
-
+        
         
         ZStack(alignment: .top){
             
             //Background colors
             LinearGradient(gradient: Gradient(colors: [.ecream,.white]), startPoint: .leading, endPoint: .bottom).ignoresSafeArea(edges: [.top, .bottom])
             
+            VStack{
+                //Top Banner
+                Image("Banner")
+                    .resizable()
+                    .frame(width: 390, height: 100)
+                    .border(Color.black, width: 3)
+                
+                Text("UPC: \(idString)")
+                    .fontWeight(.bold)
+                    .font(.system(size: 40))
+                    .foregroundColor(Color.black)
+                    .padding(.top, 20)
+                pic
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .cornerRadius(16)
+                    .foregroundColor(Color.gray)
+                    .overlay(RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color.black, lineWidth: 4))
+                    .padding(.bottom, 20)
+                
+                let sum = envSus + labSus + aniSus
+                
+                
+                HStack(spacing: 15){
+                    Image(systemName: "leaf")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(Color.egreen)
+                        .shadow(color: .egreen, radius: 4)
+                    if sum >= 5 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 8 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 11 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                    
+                    if sum >= 14 {
+                        Image(systemName: "leaf")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.egreen)
+                            .shadow(color: .egreen, radius: 4)
+                    }
+                }
+                .padding(.bottom, 10)
+                
+                VStack(alignment: .leading, spacing: 10){
+                    Text("Sustainability Report:")
+                        .foregroundColor(.black)
+                        .fontWeight(.bold)
+                        .font(.system(size: 30))
+                    Text("Brand: \(brand)")
+                        .foregroundColor(.black)
+                    Text("Environmental Sustainability: \(envSus)/5")
+                        .foregroundColor(.black)
+                    Text("Labor Sustainability: \(labSus)/5")
+                        .foregroundColor(.black)
+                    Text("Animal Sustainability: \(aniSus)/5")
+                        .foregroundColor(.black)
+                    Text("Price: $\(price)")
+                        .foregroundColor(.black)
+                    Text("Location of Origin: \(origin)")
+                        .foregroundColor(.black)
+                    
+                }
+                .background(Color.white.opacity(0.2))
+                .padding(.trailing, 100)
+                
+                
+            }
+            
         }
+        .ignoresSafeArea(edges: .top)
     }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(idString: "01234565")
+        ProductIdView()
     }
 }
 
@@ -301,6 +436,5 @@ struct ImagePicker: UIViewControllerRepresentable {
             
         }
     }
-    
     
 }
